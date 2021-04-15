@@ -1,0 +1,10 @@
+C:\Users\josti\source\repos\pileTest\obj\Debug\pileTest.csprojAssemblyReference.cache
+C:\Users\josti\source\repos\pileTest\obj\Debug\pileTest.pileTestMainWindow.resources
+C:\Users\josti\source\repos\pileTest\obj\Debug\pileTest.Properties.Resources.resources
+C:\Users\josti\source\repos\pileTest\obj\Debug\pileTest.csproj.GenerateResource.cache
+C:\Users\josti\source\repos\pileTest\obj\Debug\pileTest.csproj.CoreCompileInputs.cache
+C:\Users\josti\source\repos\pileTest\bin\Debug\pileTest.exe.config
+C:\Users\josti\source\repos\pileTest\bin\Debug\pileTest.exe
+C:\Users\josti\source\repos\pileTest\bin\Debug\pileTest.pdb
+C:\Users\josti\source\repos\pileTest\obj\Debug\pileTest.exe
+C:\Users\josti\source\repos\pileTest\obj\Debug\pileTest.pdb
