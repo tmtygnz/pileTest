@@ -11,50 +11,51 @@ namespace pileTest.Logging
 {
 	public class Logger
 	{
+		private static Queue<Message> logQueue;
 		private static StreamWriter logWriter;
-		private static Thread loggingThread;
-		public static Queue<Message> logQueue;
-		private static Dictionary<string, Thread> threadDictionary = new Dictionary<string, Thread>();
+		private static Dictionary<String, Thread> threadDictionary = new Dictionary<string, Thread>();
+		private static Thread logThread;
 		public static void initializeLogger()
 		{
 			logQueue = new Queue<Message>();
-			logWriter = File.AppendText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),"log.txt"));
-			loggingThread = new Thread(new ThreadStart(logLoop));
-			loggingThread.Name = "logLoopThread";
-			loggingThread.Start();
-			threadDictionary.Add("logLoopThread", loggingThread);
+			logWriter = File.AppendText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "log.txt"));
+			logThread = new Thread(logLoop);
+			logThread.Name = "logThread";
+			logThread.Start();
+			threadDictionary.Add("logThread", logThread);
 		}
-		private static void logLoop()
+		public static void logLoop()
 		{
-			while (true) {
+			while (true)
+			{
 				if (logQueue.Count != 0)
 				{
 					writeDisk(logQueue.Peek());
 				}
 				Thread.Sleep(100);
 			}
-		}
-		public static void log(Severity severity, string message)
+		}	
+		public static void log(Severity severity, String message)
 		{
 			Message msg = new Message()
 			{
 				message = message,
-				logTime = DateTime.Now,
-				severity = severity
+				severity = severity,
+				logTime = DateTime.UtcNow
 			};
 			logQueue.Enqueue(msg);
 		}
 		public static void writeDisk(Message message)
 		{
-			string log = $"[{message.severity.ToString().ToUpper()}] | {message.logTime} | {message.message} \n";
+			string log = $"[{message.severity.ToString().ToUpper()}] [{message.logTime}] {message.message}\n";
 			logWriter.Write(log);
-			Console.Beep(100,1000);
 			logQueue.Dequeue();
 		}
-		public static void flushAll()
+		public static void killAll()
 		{
+			logWriter.Flush();
 			logWriter.Close();
-			loggingThread.Abort();
+			logThread.Abort();
 		}
 	}
 }

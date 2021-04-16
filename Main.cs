@@ -36,8 +36,8 @@ namespace pileTest
 		private void pileTestMainWindow_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			Logger.log(Severity.Fatal, "Window Closed");
-			Thread.Sleep(600);
-			Logger.flushAll();
+			Thread.Sleep(200); // Stop for 200ms
+			Logger.killAll();
 		}
 
 		private void checkUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
